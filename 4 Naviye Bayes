@@ -1,0 +1,20 @@
+from sklearn import preprocessing
+
+# Define data
+weather = ['sunny', 'sunny', 'overcast', 'rainy', 'rainy', 'rainy', 'overcast', 
+           'sunny', 'sunny', 'rainy', 'sunny', 'overcast', 'overcast', 'rainy']
+temp = ['hot', 'hot', 'hot', 'mild', 'cool', 'cool', 'cool', 'mild', 'cool', 
+        'mild', 'mild', 'mild', 'hot', 'mild']
+play = ['no', 'no', 'yes', 'yes', 'yes', 'no', 'yes', 'no', 'yes', 'yes', 
+        'yes', 'yes', 'yes', 'no']
+
+# Label Encoding
+le = preprocessing.LabelEncoder()
+weather_encoded = le.fit_transform(weather)
+temp_encoded = le.fit_transform(temp)
+play_encoded = le.fit_transform(play)
+
+# Display results
+print('Weather:', weather_encoded)
+print('Temp:', temp_encoded)
+print('Play:', play_encoded)
