@@ -1,0 +1,30 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load dataset
+data = pd.read_csv('Salary_Data.csv')
+x, y = data['YearsExperience'], data['Salary']
+
+# Linear Regression
+B1 = np.cov(x, y, bias=True)[0, 1] / np.var(x, ddof=0)
+B0 = y.mean() - B1 * x.mean()
+
+# Correlation Coefficient
+R = np.corrcoef(x, y)[0, 1]
+
+# Print Results
+print(f"Regression: y = {B0:.3f} + {B1:.3f}X")
+print(f"Correlation: {R:.4f}, R²: {R**2:.4f}")
+
+# Plot
+plt.scatter(x, y, edgecolor='black', s=80)
+plt.plot(x, B0 + B1 * x, 'r', linewidth=2, alpha=0.7)
+plt.xlabel('Years of Experience')
+plt.ylabel('Salary')
+plt.title('Experience vs Salary')
+plt.show()
+
+# Prediction Function
+def predict(exp): return B0 + B1 * exp
+print(f"Predicted Salary for 55 years: ${predict(55):.2f}")
