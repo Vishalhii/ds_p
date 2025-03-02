@@ -1,0 +1,28 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+import seaborn as sns
+from sklearn.cluster import KMeans
+
+# Load Data
+data = pd.read_csv('Countryclusters.csv')
+
+# Scatter plot of locations
+plt.scatter(data['Longitude'], data['Latitude'])
+plt.xlim(-180, 180)
+plt.ylim(-90, 90)
+plt.show()
+
+# Selecting features for clustering
+x = data.iloc[:, 1:3]
+
+# K-Means Clustering
+kmeans = KMeans(n_clusters=3, random_state=42)
+data['Clusters'] = kmeans.fit_predict(x)
+
+# Scatter plot with clusters
+plt.scatter(data['Longitude'], data['Latitude'], c=data['Clusters'], cmap='rainbow')
+plt.xlabel("Longitude")
+plt.ylabel("Latitude")
+plt.title("Clusters of Countries")
+plt.show(
