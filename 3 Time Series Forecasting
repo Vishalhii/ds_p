@@ -1,0 +1,19 @@
+import pandas as pd
+import seaborn as sns
+import matplotlib.pyplot as plt
+
+# Load dataset
+df = pd.read_csv('AirPassengers.csv')
+
+# Convert 'Month' to datetime & set as index
+df['Month'] = pd.to_datetime(df['Month'], format='%Y-%m')
+df.set_index('Month', inplace=True)
+
+# Display first & last rows
+print(df.head(), "\n", df.tail())
+
+# Filter for a specific month & plot
+sns.lineplot(data=df, x=df.index, y="#Passengers")
+plt.title("Air Passenger Trend")
+plt.ylabel("Number of Passengers")
+plt.show()
