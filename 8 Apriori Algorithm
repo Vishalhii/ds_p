@@ -1,0 +1,18 @@
+import numpy as np
+import pandas as pd
+import matplotlib.pyplot as plt
+from apyori import apriori
+
+# Load dataset
+store_data = pd.read_csv('store_data.csv', header=None)
+
+# Convert dataset to list format
+records = [[str(store_data.values[i, j]) for j in range(20)] for i in range(len(store_data))]
+
+# Apply Apriori algorithm
+rules = list(apriori(records, min_support=0.0045, min_confidence=0.2, min_length=2))
+
+# Print results
+print(f"Total Rules Found: {len(rules)}")
+for rule in rules:
+    print(rule)
