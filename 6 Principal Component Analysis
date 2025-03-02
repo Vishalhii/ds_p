@@ -1,0 +1,18 @@
+import numpy as np
+from sklearn.decomposition import PCA
+
+# Sample data
+X = np.array([[-1, 1], [-2, -1], [-3, -2], [1, 1], [2, 1], [3, 2]])
+
+# Function to print PCA results
+def apply_pca(n, solver=None):
+    pca = PCA(n_components=n, svd_solver=solver) if solver else PCA(n_components=n)
+    pca.fit(X)
+    print(f"\nPCA ({n} components, solver={solver}):")
+    print("Variance Ratio:", pca.explained_variance_ratio_)
+    print("Singular Values:", pca.singular_values_)
+
+# Apply PCA with different parameters
+apply_pca(2)
+apply_pca(2, 'full')
+apply_pca(1, 'arpack')
